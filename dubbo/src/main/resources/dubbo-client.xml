@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <dubbo:application name="dubbo-test-client" version="0.0.1" default="true" owner="nicee"
+                       logger="log4j" registry="local-registry"/>
+
+    <!-- 如果只选protocol的值，则不需要在address中添加协议前缀，如zookeeper:// -->
+    <dubbo:registry id="local-registry" protocol="zookeeper" address="127.0.0.1:2181" check="true"/>
+
+    <dubbo:consumer id="local-consumer" group="local-dubbo" version="0.0.1" check="true"/>
+
+    <dubbo:protocol name="dubbo" host="127.0.0.1" port="21056" server="netty" serialization="java"/>
+
+    <dubbo:reference id="workService" interface="test.performance.service.IWorkService" check="true"/>
+
+</beans>
