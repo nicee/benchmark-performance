@@ -13,10 +13,13 @@
     <dubbo:application name="dubbo-test" version="0.0.1" default="true" owner="nicee"
                        logger="log4j" registry="local-registry"/>
 
+    <!-- 指定group将在zookeeper中创建根目录，未指定则在dubbo目录下 -->
     <!-- 如果只选protocol的值，则不需要在address中添加协议前缀，如zookeeper:// -->
-    <dubbo:registry id="local-registry" protocol="zookeeper" address="127.0.0.1:2181" check="true"/>
+    <!-- zookeeper -->
+    <dubbo:registry id="local-registry" protocol="zookeeper" address="127.0.0.1:2181" check="true" client="zkclient"/>
+    <!--<dubbo:registry id="local-registry" protocol="redis" address="127.0.0.1:6379" check="true"/>-->
 
-    <dubbo:protocol name="dubbo" host="127.0.0.1" port="21056" server="netty" serialization="java"/>
+    <dubbo:protocol name="dubbo" host="127.0.0.1" port="21056" server="netty" serialization="hessian2"/>
 
     <dubbo:provider accesslog="true" host="127.0.0.1" port="9998" group="local-dubbo" version="0.0.1"/>
 
